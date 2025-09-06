@@ -1943,23 +1943,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\koko\\.nuget\\packages\\": {},
+    "C:\\Users\\komya.koko-pc\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\koko\\KOKO\\sample_code\\mk_sample\\BLA\\server\\BookLibraryServer\\BookLibraryServer.csproj",
+      "projectUniqueName": "E:\\BLA_book_library\\server\\BookLibraryServer\\BookLibraryServer.csproj",
       "projectName": "BookLibraryServer",
-      "projectPath": "C:\\Users\\koko\\KOKO\\sample_code\\mk_sample\\BLA\\server\\BookLibraryServer\\BookLibraryServer.csproj",
-      "packagesPath": "C:\\Users\\koko\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\koko\\KOKO\\sample_code\\mk_sample\\BLA\\server\\BookLibraryServer\\obj\\",
+      "projectPath": "E:\\BLA_book_library\\server\\BookLibraryServer\\BookLibraryServer.csproj",
+      "packagesPath": "C:\\Users\\komya.koko-pc\\.nuget\\packages\\",
+      "outputPath": "E:\\BLA_book_library\\server\\BookLibraryServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\koko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\komya.koko-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1968,15 +1968,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://codeer.pkgs.visualstudio.com/digic_assist/_packaging/LicenseServer/nuget/v3/index.json": {}
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\koko\\KOKO\\sample_code\\mk_sample\\BLA\\server\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj": {
-              "projectPath": "C:\\Users\\koko\\KOKO\\sample_code\\mk_sample\\BLA\\server\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj"
+            "E:\\BLA_book_library\\server\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj": {
+              "projectPath": "E:\\BLA_book_library\\server\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj"
             }
           }
         }
