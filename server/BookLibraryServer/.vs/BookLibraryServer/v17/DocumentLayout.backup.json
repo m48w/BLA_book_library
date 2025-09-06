@@ -1,0 +1,305 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\models\\master\\authorsmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:models\\master\\authorsmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\models\\master\\genresmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:models\\master\\genresmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\models\\master\\usersmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:models\\master\\usersmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E3EE88-D7D0-4E71-996E-C09BFB00999B}|..\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver.contract\\models\\master\\iusermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E3EE88-D7D0-4E71-996E-C09BFB00999B}|..\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver.contract\\models\\master\\imastermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E3EE88-D7D0-4E71-996E-C09BFB00999B}|..\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver.contract\\models\\master\\iauthormodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E3EE88-D7D0-4E71-996E-C09BFB00999B}|..\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver.contract\\models\\master\\igenremodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E3EE88-D7D0-4E71-996E-C09BFB00999B}|..\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver.contract\\booklibraryserver.contract.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk.Razor\\targets\\Microsoft.NET.Sdk.Razor.MvcApplicationPartsDiscovery.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E3EE88-D7D0-4E71-996E-C09BFB00999B}|..\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver.contract\\data\\idbconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\data\\sqlconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:data\\sqlconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\booklibraryserver.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:booklibraryserver.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|c:\\users\\koko\\koko\\sample_code\\digic_internal_app\\each_app\\libraryapp\\app\\digiclibrary\\server\\booklibraryserver\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{CFF6D965-A85D-43B6-A8A9-395A347DBFC7}|BookLibraryServer.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 13,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IGenreModel.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Models\\Master\\IGenreModel.cs",
+              "RelativeDocumentMoniker": "..\\BookLibraryServer.Contract\\Models\\Master\\IGenreModel.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Models\\Master\\IGenreModel.cs",
+              "RelativeToolTip": "..\\BookLibraryServer.Contract\\Models\\Master\\IGenreModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwgAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T06:27:25.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IAuthorModel.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Models\\Master\\IAuthorModel.cs",
+              "RelativeDocumentMoniker": "..\\BookLibraryServer.Contract\\Models\\Master\\IAuthorModel.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Models\\Master\\IAuthorModel.cs",
+              "RelativeToolTip": "..\\BookLibraryServer.Contract\\Models\\Master\\IAuthorModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T06:27:06.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IUserModel.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Models\\Master\\IUserModel.cs",
+              "RelativeDocumentMoniker": "..\\BookLibraryServer.Contract\\Models\\Master\\IUserModel.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Models\\Master\\IUserModel.cs",
+              "RelativeToolTip": "..\\BookLibraryServer.Contract\\Models\\Master\\IUserModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvw0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T06:26:30.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IMasterModel.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Models\\Master\\IMasterModel.cs",
+              "RelativeDocumentMoniker": "..\\BookLibraryServer.Contract\\Models\\Master\\IMasterModel.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Models\\Master\\IMasterModel.cs",
+              "RelativeToolTip": "..\\BookLibraryServer.Contract\\Models\\Master\\IMasterModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvw8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T06:23:15.462Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Microsoft.NET.Sdk.Razor.MvcApplicationPartsDiscovery.targets",
+              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk.Razor\\targets\\Microsoft.NET.Sdk.Razor.MvcApplicationPartsDiscovery.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk.Razor\\targets\\Microsoft.NET.Sdk.Razor.MvcApplicationPartsDiscovery.targets",
+              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk.Razor\\targets\\Microsoft.NET.Sdk.Razor.MvcApplicationPartsDiscovery.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk.Razor\\targets\\Microsoft.NET.Sdk.Razor.MvcApplicationPartsDiscovery.targets",
+              "ViewState": "AgIAACIAAAAAAAAAAAArwCcAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-08-20T05:53:53.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IDbConnectionFactory.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Data\\IDbConnectionFactory.cs",
+              "RelativeDocumentMoniker": "..\\BookLibraryServer.Contract\\Data\\IDbConnectionFactory.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\Data\\IDbConnectionFactory.cs",
+              "RelativeToolTip": "..\\BookLibraryServer.Contract\\Data\\IDbConnectionFactory.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAwwAkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T05:37:02.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAADwvwoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T05:08:42.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UsersModel.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Models\\Master\\UsersModel.cs",
+              "RelativeDocumentMoniker": "Models\\Master\\UsersModel.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Models\\Master\\UsersModel.cs",
+              "RelativeToolTip": "Models\\Master\\UsersModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T06:40:36.562Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-20T05:02:45.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MasterController.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Controllers\\MasterController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MasterController.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Controllers\\MasterController.cs",
+              "RelativeToolTip": "Controllers\\MasterController.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAIwC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T06:31:39.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthorsModel.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Models\\Master\\AuthorsModel.cs",
+              "RelativeDocumentMoniker": "Models\\Master\\AuthorsModel.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Models\\Master\\AuthorsModel.cs",
+              "RelativeToolTip": "Models\\Master\\AuthorsModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T06:40:30.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GenresModel.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Models\\Master\\GenresModel.cs",
+              "RelativeDocumentMoniker": "Models\\Master\\GenresModel.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Models\\Master\\GenresModel.cs",
+              "RelativeToolTip": "Models\\Master\\GenresModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T06:49:23.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SqlConnectionFactory.cs",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Data\\SqlConnectionFactory.cs",
+              "RelativeDocumentMoniker": "Data\\SqlConnectionFactory.cs",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Data\\SqlConnectionFactory.cs",
+              "RelativeToolTip": "Data\\SqlConnectionFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T05:33:52.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BookLibraryServer.Contract.csproj",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj",
+              "RelativeDocumentMoniker": "..\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj",
+              "RelativeToolTip": "..\\BookLibraryServer.Contract\\BookLibraryServer.Contract.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-08-20T05:29:46.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "BookLibraryServer.http",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\BookLibraryServer.http",
+              "RelativeDocumentMoniker": "BookLibraryServer.http",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\BookLibraryServer.http",
+              "RelativeToolTip": "BookLibraryServer.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-08-20T05:00:28.521Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\koko\\KOKO\\sample_code\\digic_internal_app\\each_app\\LibraryApp\\app\\DigicLibrary\\server\\BookLibraryServer\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-20T04:56:44.12Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
