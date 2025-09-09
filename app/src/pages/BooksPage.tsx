@@ -212,7 +212,7 @@ const BooksPage: React.FC = () => {
     console.log("closeAllModals: all modals closed");
   };
 
-  console.log("BooksPage render: isEditModalOpen", isEditModalOpen);
+  
 
   return (
     <Container>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 import type { Author } from '../types/author';
@@ -91,7 +91,7 @@ interface BookFormProps {
 }
 
 const BookForm: React.FC<BookFormProps> = ({ authors, genres, publishers, onSave, onCancel, initialBookData }) => {
-  console.log("BookForm: initialBookData received", initialBookData);
+  
   const [formData, setFormData] = useState<BookFormData>(initialBookData || {
     title: '',
     authorIds: [],
@@ -125,7 +125,7 @@ const BookForm: React.FC<BookFormProps> = ({ authors, genres, publishers, onSave
         ...prev,
         [name]: isCheckbox ? (e.target as HTMLInputElement).checked : value,
       };
-      console.log("BookForm: handleChange - new formData", newState);
+      
       return newState;
     });
   };
