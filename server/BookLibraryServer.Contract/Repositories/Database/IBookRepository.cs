@@ -6,5 +6,6 @@ namespace BookLibraryServer.Contract.Repositories.Database
     {
         Task<IEnumerable<IBookModel>> SearchAsync(string? keyword);
         Task<IBookModel> AddAsync(BookCreateModel book);
+        Task<IBookModel?> UpdateAsync(int id, BookCreateModel book);
     }
 }
