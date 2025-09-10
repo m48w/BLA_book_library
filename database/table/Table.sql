@@ -78,7 +78,8 @@ CREATE TABLE [dbo].[Users] (
   PRIMARY KEY ([user_id]),
   UNIQUE ([code]),
   UNIQUE ([email]),
-  FOREIGN KEY ([department_id]) REFERENCES [dbo].[Departments]([department_id])
+      DepartmentId INT,
+    FOREIGN KEY (DepartmentId) REFERENCES M_Department(Id)
 );
 GO
 

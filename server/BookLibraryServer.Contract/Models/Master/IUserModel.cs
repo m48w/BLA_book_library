@@ -14,5 +14,6 @@ namespace BookLibraryServer.Contract.Models.Master
         public string? Notes { get; }
         public int? DepartmentId { get; }
         public string? DepartmentName { get; }
+        public bool? IsAdminStaff { get; }
     }
 }

@@ -9,7 +9,7 @@ namespace BookLibraryServer.Logic.Database
         private readonly IRentalRepository _rentalRepository;
         private readonly IBookRepository _bookRepository;
 
-        // Status IDs (assuming these are fixed and known)
+        // Status IDs from the database
         private const int STATUS_AVAILABLE = 1; // 貸出可能
         private const int STATUS_RENTED = 2;    // 貸出中
 
@@ -21,6 +21,7 @@ namespace BookLibraryServer.Logic.Database
 
         public async Task<IRentalModel> BorrowBookAsync(int bookId, int userId)
         {
+            Console.WriteLine($"RentalLogic: BorrowBookAsync called for BookId: {bookId}, UserId: {userId}");
             // Check if book is available (optional, but good practice)
             // For simplicity, we assume it's available if not actively rented
             var activeRental = await _rentalRepository.GetActiveRentalByBookIdAsync(bookId);
@@ -42,6 +43,7 @@ namespace BookLibraryServer.Logic.Database
 
         public async Task<bool> ReturnBookAsync(int bookId)
         {
+            Console.WriteLine($"RentalLogic: ReturnBookAsync called for BookId: {bookId}");
             // Find active rental for the book
             var activeRental = await _rentalRepository.GetActiveRentalByBookIdAsync(bookId);
             if (activeRental == null)
@@ -60,6 +62,11 @@ namespace BookLibraryServer.Logic.Database
             }
 
             return result;
+        }
+
+        public async Task<IEnumerable<RentalDisplayModel>> GetActiveRentalsAsync()
+        {
+            return await _rentalRepository.GetActiveRentalsAsync();
         }
     }
 }

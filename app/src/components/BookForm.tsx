@@ -103,7 +103,7 @@ const BookForm: React.FC<BookFormProps> = ({ authors, genres, publishers, onSave
     description: '',
     notes: '',
     isRecommended: false,
-    statusId: 1, // Default status for new books
+    statusId: 1, // Default status: Available
   });
 
   // Update form data when initialBookData changes (for editing)

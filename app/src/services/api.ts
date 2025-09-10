@@ -3,6 +3,7 @@ import type { Author } from '../types/author';
 import type { Genre } from '../types/genre';
 import type { Publisher } from '../types/publisher';
 import type { User } from '../types/user'; // 追加
+import type { Department } from '../types/department';
 import type { Book } from '../types/book';
 import type { DashboardStats } from '../types/dashboard';
 
@@ -11,12 +12,17 @@ const apiClient = axios.create({
 });
 
 export const getDashboardStats = async (): Promise<DashboardStats> => {
-  const response = await apiClient.get<DashboardStats>('/dashboard/stats');
+  const response = await apiClient.get('/dashboard/stats');
   return response.data;
 };
 
-export const getBooks = async (keyword?: string): Promise<Book[]> => {
-  const response = await apiClient.get<Book[]>('/books', { params: { keyword } });
+export const getRecommendedBooks = async (): Promise<Book[]> => {
+  const response = await apiClient.get('/books/recommended');
+  return response.data;
+};
+
+export const getBooks = async (keyword?: string, genreId?: number): Promise<Book[]> => {
+  const response = await apiClient.get<Book[]>('/books', { params: { keyword, genreId } });
   return response.data;
 };
 
@@ -102,6 +108,11 @@ export const deletePublisher = async (id: number): Promise<void> => {
   await apiClient.delete(`/publishers/${id}`);
 };
 
+export const getDepartments = async (keyword?: string): Promise<Department[]> => {
+  const response = await apiClient.get<Department[]>('/departments', { params: { keyword } });
+  return response.data;
+};
+
 export const getUsers = async (keyword?: string): Promise<User[]> => {
   const response = await apiClient.get<User[]>('/users', { params: { keyword } });
   return response.data;
@@ -127,4 +138,9 @@ export const borrowBook = async (bookId: number, userId: number): Promise<any> =
 
 export const returnBook = async (bookId: number): Promise<void> => {
   await apiClient.post(`/rentals/return?bookId=${bookId}`);
+};
+
+export const getActiveRentals = async (): Promise<RentalDisplay[]> => {
+  const response = await apiClient.get<RentalDisplay[]>('/rentals/active');
+  return response.data;
 };

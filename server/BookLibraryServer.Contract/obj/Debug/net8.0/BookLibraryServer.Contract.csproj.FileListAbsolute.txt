@@ -32,3 +32,15 @@ C:\Users\koko\KOKO\sample_code\mk_sample\BLA\server\BookLibraryServer.Contract\o
 C:\Users\koko\KOKO\sample_code\mk_sample\BLA\server\BookLibraryServer.Contract\obj\Debug\net8.0\refint\BookLibraryServer.Contract.dll
 C:\Users\koko\KOKO\sample_code\mk_sample\BLA\server\BookLibraryServer.Contract\obj\Debug\net8.0\BookLibraryServer.Contract.pdb
 C:\Users\koko\KOKO\sample_code\mk_sample\BLA\server\BookLibraryServer.Contract\obj\Debug\net8.0\ref\BookLibraryServer.Contract.dll
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\bin\Debug\net8.0\BookLibraryServer.Contract.deps.json
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\bin\Debug\net8.0\BookLibraryServer.Contract.dll
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\bin\Debug\net8.0\BookLibraryServer.Contract.pdb
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\BookLibraryServer.Contract.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\BookLibraryServer.Contract.AssemblyInfoInputs.cache
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\BookLibraryServer.Contract.AssemblyInfo.cs
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\BookLibraryServer.Contract.csproj.CoreCompileInputs.cache
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\BookLibraryServer.Contract.sourcelink.json
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\BookLibraryServer.Contract.dll
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\refint\BookLibraryServer.Contract.dll
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\BookLibraryServer.Contract.pdb
+C:\Users\koko\KOKO\sample_code\mk_sample\BLA_book_library\server\BookLibraryServer.Contract\obj\Debug\net8.0\ref\BookLibraryServer.Contract.dll

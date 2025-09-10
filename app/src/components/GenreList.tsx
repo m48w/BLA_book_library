@@ -44,16 +44,19 @@ interface GenreListProps {
   onDelete: (id: number) => void;
 }
 
+import { useAuth } from '../context/AuthContext';
+
 const GenreList: React.FC<GenreListProps> = ({ genres, onEdit, onDelete }) => {
+  const { isAdmin } = useAuth();
   return (
     <List>
       {genres.map(genre => (
         <ListItem key={genre.id}>
           {genre.name}
-          <ButtonGroup>
+          {isAdmin && <ButtonGroup>
             <EditButton onClick={() => onEdit(genre)}>編集</EditButton>
             <DeleteButton onClick={() => onDelete(genre.id)}>削除</DeleteButton>
-          </ButtonGroup>
+          </ButtonGroup>}
         </ListItem>
       ))}
     </List>

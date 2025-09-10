@@ -1,7 +1,7 @@
 using BookLibraryServer.Contract.Data;
 using BookLibraryServer.Contract.Models.Database;
 using BookLibraryServer.Contract.Repositories.Database;
-using BookLibraryServer.Models.Database;
+using BookLibraryServer.Models.Database; // Explicitly added
 using Dapper;
 
 namespace BookLibraryServer.Repositories.Database
@@ -50,11 +50,37 @@ SELECT CAST(SCOPE_IDENTITY() as int);
 
         public async Task<bool> UpdateBookStatusAsync(int bookId, int newStatusId)
         {
+            Console.WriteLine($"UpdateBookStatusAsync called for BookId: {bookId}, NewStatusId: {newStatusId}");
             var query = "UPDATE dbo.Books SET status_id = @NewStatusId WHERE book_id = @BookId";
             return await _dbConnectionFactory.ExecuteAsync(async (connection) =>
             {
                 var affectedRows = await connection.ExecuteAsync(query, new { BookId = bookId, NewStatusId = newStatusId });
+                Console.WriteLine($"UpdateBookStatusAsync affected rows: {affectedRows}");
                 return affectedRows > 0;
+            });
+        }
+
+        public async Task<IEnumerable<RentalDisplayModel>> GetActiveRentalsAsync()
+        {
+            var query = @"
+SELECT
+    R.rental_id AS RentalId,
+    R.book_id AS BookId,
+    B.title AS BookTitle,
+    B.cover_image_url AS BookCoverImageUrl,
+    R.user_id AS UserId,
+    U.name AS UserName,
+    R.rental_date AS RentalDate,
+    R.due_date AS DueDate
+FROM dbo.Rentals AS R
+JOIN dbo.Books AS B ON R.book_id = B.book_id
+JOIN dbo.Users AS U ON R.user_id = U.user_id
+WHERE R.return_date IS NULL;
+";
+            return await _dbConnectionFactory.ExecuteAsync(async (connection) =>
+            {
+                var rentals = await connection.QueryAsync<RentalDisplayModel>(query);
+                return rentals;
             });
         }
     }

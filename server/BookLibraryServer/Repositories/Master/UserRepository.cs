@@ -27,6 +27,7 @@ SELECT
   , U.notes AS Notes
   , D.department_id AS DepartmentId
   , D.name AS DepartmentName
+  , U.is_admin_staff AS IsAdminStaff
 FROM dbo.Users AS U
 LEFT JOIN dbo.Departments AS D
   ON U.department_id = D.department_id
@@ -56,6 +57,7 @@ SELECT
   , U.notes AS Notes
   , D.department_id AS DepartmentId
   , D.name AS DepartmentName
+  , U.is_admin_staff AS IsAdminStaff
 FROM dbo.Users AS U
 LEFT JOIN dbo.Departments AS D
   ON U.department_id = D.department_id
@@ -71,8 +73,8 @@ WHERE U.user_id = @Id
         public async Task<IUserModel> AddUserAsync(IUserModel user)
         {
             var query = @"
-INSERT INTO dbo.Users (name, email, code, name_kana, notes, department_id)
-VALUES (@Name, @Email, @Code, @NameKana, @Notes, @DepartmentId);
+INSERT INTO dbo.Users (name, email, code, name_kana, notes, department_id, is_admin_staff)
+VALUES (@Name, @Email, @Code, @NameKana, @Notes, @DepartmentId, @IsAdminStaff);
 SELECT CAST(SCOPE_IDENTITY() as int);
 ";
             return await _dbConnectionFactory.ExecuteAsync(async (connection) =>
@@ -92,7 +94,8 @@ SET
   code = @Code,
   name_kana = @NameKana,
   notes = @Notes,
-  department_id = @DepartmentId
+  department_id = @DepartmentId,
+  is_admin_staff = @IsAdminStaff
 WHERE user_id = @Id
 ";
             return await _dbConnectionFactory.ExecuteAsync(async (connection) =>

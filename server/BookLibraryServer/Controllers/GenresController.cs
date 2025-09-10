@@ -20,6 +20,7 @@ namespace BookLibraryServer.Controllers
         public async Task<IActionResult> GetGenres([FromQuery] string? keyword)
         {
             var items = await _genreLogic.SearchAsync(keyword);
+            Console.WriteLine($"GenresController: Retrieved {items.Count()} items.");
             return Ok(items);
         }
 

@@ -13,15 +13,25 @@ namespace BookLibraryServer.Logic.Database
             _bookRepository = bookRepository;
         }
 
-        public async Task<IEnumerable<IBookModel>> SearchAsync(string? keyword)
+        public async Task<IEnumerable<IBookModel>> SearchAsync(string? keyword, int? genreId)
         {
-            return await _bookRepository.SearchAsync(keyword);
+            return await _bookRepository.SearchAsync(keyword, genreId);
         }
 
         public async Task<IBookModel> AddAsync(BookCreateModel book)
         {
             // Add any business logic validation here
             return await _bookRepository.AddAsync(book);
+        }
+
+        public async Task<IBookModel?> UpdateAsync(int id, BookCreateModel book)
+        {
+            return await _bookRepository.UpdateAsync(id, book);
+        }
+
+        public async Task<IEnumerable<IBookModel>> GetRecommendedAsync()
+        {
+            return await _bookRepository.GetRecommendedAsync();
         }
     }
 }

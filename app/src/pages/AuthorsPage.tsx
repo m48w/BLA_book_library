@@ -57,7 +57,10 @@ const AddButton = styled(SearchButton)`
   }
 `;
 
+import { useAuth } from '../context/AuthContext';
+
 const AuthorsPage: React.FC = () => {
+  const { isAdmin } = useAuth();
   const [authors, setAuthors] = useState<Author[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -136,7 +139,7 @@ const AuthorsPage: React.FC = () => {
           onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
         />
         <SearchButton onClick={handleSearch}>検索</SearchButton>
-        <AddButton onClick={() => openModal()}>新規追加</AddButton>
+        {isAdmin && <AddButton onClick={() => openModal()}>新規追加</AddButton>}
       </SearchContainer>
       {loading && <p>読み込み中...</p>}
       {error && <ErrorMessage>{error}</ErrorMessage>}

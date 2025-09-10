@@ -17,9 +17,9 @@ namespace BookLibraryServer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetBooks([FromQuery] string? keyword)
+        public async Task<IActionResult> GetBooks([FromQuery] string? keyword, [FromQuery] int? genreId)
         {
-            var items = await _bookLogic.SearchAsync(keyword);
+            var items = await _bookLogic.SearchAsync(keyword, genreId);
             return Ok(items);
         }
 
@@ -35,6 +35,29 @@ namespace BookLibraryServer.Controllers
             // Returning the created book with a 201 status code.
             // The location header is omitted for simplicity, but could be added.
             return StatusCode(201, newBook);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBook(int id, [FromBody] BookCreateModel book)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var updatedBook = await _bookLogic.UpdateAsync(id, book);
+            if (updatedBook == null)
+            {
+                return NotFound();
+            }
+            return Ok(updatedBook);
+        }
+
+        [HttpGet("recommended")]
+        public async Task<IActionResult> GetRecommendedBooks()
+        {
+            var books = await _bookLogic.GetRecommendedAsync();
+            return Ok(books);
         }
     }
 }

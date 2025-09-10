@@ -66,11 +66,11 @@ const PlaceholderImage = styled.div`
   font-size: 1rem;
 `;
 
-const StatusLabel = styled.span<{ status: string }>`
+const StatusLabel = styled.span<{ $status: string }>`
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  background-color: ${props => (props.status === '貸出可能' ? '#28a745' : '#ffc107')};
+  background-color: ${props => (props.$status === '貸出可能' ? '#28a745' : '#ffc107')};
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
@@ -94,7 +94,7 @@ const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
             <PlaceholderImage>No Image</PlaceholderImage>
           )}
           <BookInfo>
-            {book.statusName && <StatusLabel status={book.statusName}>{book.statusName}</StatusLabel>}
+            {book.statusName && <StatusLabel $status={book.statusName}>{book.statusName}</StatusLabel>}
             <BookTitle>{book.title}</BookTitle>
             <BookAuthors>{book.authorNames || '不明な著者'}</BookAuthors>
             <BookPublisher>{book.publisherName || '不明な出版社'}</BookPublisher>

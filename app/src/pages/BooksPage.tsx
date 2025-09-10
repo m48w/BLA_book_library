@@ -50,6 +50,14 @@ const SearchInput = styled.input`
   font-size: 1rem;
 `;
 
+const Select = styled.select`
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: white;
+`;
+
 const SearchButton = styled.button`
   padding: 0.8rem 1.5rem;
   background-color: #007bff;
@@ -73,14 +81,18 @@ const AddButton = styled(SearchButton)`
   }
 `;
 
+import { useAuth } from '../context/AuthContext';
+
 const BooksPage: React.FC = () => {
+  const { isAdmin } = useAuth();
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false); // Explicitly re-declare
-  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState<boolean>(false); // Explicitly re-declare
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false); // Explicitly re-declare
+  const [selectedGenre, setSelectedGenre] = useState<number | undefined>(undefined);
+  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [editingBookFormData, setEditingBookFormData] = useState<BookFormData | undefined>(undefined);
 
@@ -89,11 +101,12 @@ const BooksPage: React.FC = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [publishers, setPublishers] = useState<Publisher[]>([]);
 
-  const fetchBooks = useCallback(async (keyword?: string) => {
+  const fetchBooks = useCallback(async (keyword?: string, genreId?: number) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await getBooks(keyword);
+      const data = await getBooks(keyword, genreId);
+      console.log("Fetched books:", data);
       setBooks(data);
     } catch (err) {
       console.error("Error fetching books:", err);
@@ -106,21 +119,25 @@ const BooksPage: React.FC = () => {
   const fetchFormData = useCallback(async () => {
     try {
       setAuthors(await getAuthors());
-      setGenres(await getGenres());
+      const fetchedGenres = await getGenres();
+      setGenres(fetchedGenres);
       setPublishers(await getPublishers());
-    } catch (error) { // Changed 'err' to 'error' and used it
+    } catch (error) {
       console.error("Error fetching form data:", error);
       setError('フォームデータの取得に失敗しました。');
     }
   }, []);
 
   useEffect(() => {
-    fetchBooks();
     fetchFormData();
-  }, [fetchBooks, fetchFormData]);
+  }, [fetchFormData]);
+
+  useEffect(() => {
+    fetchBooks(searchTerm, selectedGenre);
+  }, [fetchBooks, searchTerm, selectedGenre]);
 
   const handleSearch = () => {
-    fetchBooks(searchTerm);
+    fetchBooks(searchTerm, selectedGenre);
   };
 
   const bookToFormData = (book: Book, allAuthors: Author[], allGenres: Genre[], allPublishers: Publisher[]): BookFormData => {
@@ -154,7 +171,7 @@ const BooksPage: React.FC = () => {
         await createBook(bookData);
       }
       closeAllModals();
-      fetchBooks(searchTerm);
+      fetchBooks(searchTerm, selectedGenre); // Re-fetch with current filters
     } catch (err) {
       console.error("Error saving book:", err);
       setError('書籍の保存に失敗しました。');
@@ -169,10 +186,17 @@ const BooksPage: React.FC = () => {
   const handleBorrow = async (bookId: number) => {
     const userId = 1; // TODO: Replace with actual user ID from authentication
     try {
+      console.log("Before borrow - selectedBook:", selectedBook);
       await borrowBook(bookId, userId);
       alert(`書籍ID: ${bookId} を借りました。`);
       closeAllModals();
-      fetchBooks(searchTerm); // Refresh list to update status
+      await fetchBooks(searchTerm, selectedGenre); // Ensure fetchBooks completes
+      // Find the updated book from the newly fetched list and set it as selectedBook
+      const updatedBook = books.find(book => book.id === bookId);
+      if (updatedBook) {
+        setSelectedBook(updatedBook);
+      }
+      console.log("After borrow - selectedBook:", selectedBook);
     } catch (err) {
       console.error("Error borrowing book:", err);
       alert('書籍の貸出しに失敗しました。');
@@ -181,10 +205,17 @@ const BooksPage: React.FC = () => {
 
   const handleReturn = async (bookId: number) => {
     try {
+      console.log("Before return - selectedBook:", selectedBook);
       await returnBook(bookId);
       alert(`書籍ID: ${bookId} を返却しました。`);
       closeAllModals();
-      fetchBooks(searchTerm); // Refresh list to update status
+      await fetchBooks(searchTerm, selectedGenre); // Ensure fetchBooks completes
+      // Find the updated book from the newly fetched list and set it as selectedBook
+      const updatedBook = books.find(book => book.id === bookId);
+      if (updatedBook) {
+        setSelectedBook(updatedBook);
+      }
+      console.log("After return - selectedBook:", selectedBook);
     } catch (err) {
       console.error("Error returning book:", err);
       alert('書籍の返却に失敗しました。');
@@ -212,8 +243,6 @@ const BooksPage: React.FC = () => {
     console.log("closeAllModals: all modals closed");
   };
 
-  
-
   return (
     <Container>
       <Title>書籍一覧</Title>
@@ -226,9 +255,18 @@ const BooksPage: React.FC = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
           />
+          <Select
+            value={selectedGenre ?? ''}
+            onChange={(e) => setSelectedGenre(e.target.value ? Number(e.target.value) : undefined)}
+          >
+            <option value="">すべてのジャンル</option>
+            {genres.map(genre => (
+              <option key={genre.id} value={genre.id}>{genre.name}</option>
+            ))}
+          </Select>
           <SearchButton onClick={handleSearch}>検索</SearchButton>
         </SearchContainer>
-        <AddButton onClick={() => setIsAddModalOpen(true)}>新規追加</AddButton>
+        {isAdmin && <AddButton onClick={() => setIsAddModalOpen(true)}>新規追加</AddButton>}
       </HeaderContainer>
       {loading && <p>読み込み中...</p>}
       {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -237,7 +275,7 @@ const BooksPage: React.FC = () => {
       {/* Add Book Modal */}
       <Modal isOpen={isAddModalOpen} onClose={closeAllModals}>
         <h2>新規書籍追加</h2>
-        <BookForm 
+        <BookForm
           authors={authors}
           genres={genres}
           publishers={publishers}
@@ -249,9 +287,9 @@ const BooksPage: React.FC = () => {
       {/* Book Details Modal */}
       {selectedBook && (
         <Modal isOpen={isDetailsModalOpen} onClose={closeAllModals}>
-          <BookDetails 
-            book={selectedBook} 
-            onBorrow={handleBorrow} 
+          <BookDetails
+            book={selectedBook}
+            onBorrow={handleBorrow}
             onEdit={handleEdit}
             onReturn={handleReturn}
           />
@@ -262,7 +300,7 @@ const BooksPage: React.FC = () => {
       {selectedBook && (
         <Modal isOpen={isEditModalOpen} onClose={closeAllModals}>
           <h2>書籍編集</h2>
-          <BookForm 
+          <BookForm
             authors={authors}
             genres={genres}
             publishers={publishers}

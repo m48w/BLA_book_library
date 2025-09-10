@@ -44,16 +44,19 @@ interface PublisherListProps {
   onDelete: (id: number) => void;
 }
 
+import { useAuth } from '../context/AuthContext';
+
 const PublisherList: React.FC<PublisherListProps> = ({ publishers, onEdit, onDelete }) => {
+  const { isAdmin } = useAuth();
   return (
     <List>
       {publishers.map(publisher => (
         <ListItem key={publisher.id}>
           {publisher.name}
-          <ButtonGroup>
+          {isAdmin && <ButtonGroup>
             <EditButton onClick={() => onEdit(publisher)}>編集</EditButton>
             <DeleteButton onClick={() => onDelete(publisher.id)}>削除</DeleteButton>
-          </ButtonGroup>
+          </ButtonGroup>}
         </ListItem>
       ))}
     </List>

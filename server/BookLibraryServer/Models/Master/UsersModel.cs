@@ -4,17 +4,20 @@ namespace BookLibraryServer.Models.Master
 {
     public class UsersModel : IUserModel
     {
-        public int? Id { get; }
-        public string? Name { get; }
-        public string? Email { get; }
-        public string? Code { get; }
-        public string? NameKana { get; }
-        public string? Notes { get; }
-        public int? DepartmentId { get; }
-        public string? DepartmentName { get; }
+        public int? Id { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? Code { get; set; }
+        public string? NameKana { get; set; }
+        public string? Notes { get; set; }
+        public int? DepartmentId { get; set; }
+        public string? DepartmentName { get; set; }
+        public bool? IsAdminStaff { get; set; }
 
+        // for Dapper
+        public UsersModel() { }
 
-        public UsersModel(int? id, string? name, string? email, string? code, string? nameKana, string? notes, int? departmentId, string? departmentName)
+        public UsersModel(int? id, string? name, string? email, string? code, string? nameKana, string? notes, int? departmentId, string? departmentName, bool? isAdminStaff)
         {
             Id = id;
             Name = name;
@@ -24,6 +27,7 @@ namespace BookLibraryServer.Models.Master
             Notes = notes;
             DepartmentId = departmentId;
             DepartmentName = departmentName;
+            IsAdminStaff = isAdminStaff;
         }
     }
 }

@@ -8,5 +8,6 @@ namespace BookLibraryServer.Contract.Repositories.Database
         Task<IRentalModel?> GetActiveRentalByBookIdAsync(int bookId);
         Task<bool> RecordReturnAsync(int rentalId, DateTime returnDate);
         Task<bool> UpdateBookStatusAsync(int bookId, int newStatusId);
+        Task<IEnumerable<RentalDisplayModel>> GetActiveRentalsAsync();
     }
 }

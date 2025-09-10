@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { Book } from '../types/book';
+import { useAuth } from '../context/AuthContext';
 
 const DetailContainer = styled.div`
   display: flex;
@@ -89,6 +90,7 @@ interface BookDetailsProps {
 }
 
 const BookDetails: React.FC<BookDetailsProps> = ({ book, onBorrow, onEdit, onReturn }) => {
+  const { isAdmin } = useAuth();
   return (
     <DetailContainer>
       {book.coverImageUrl ? (
@@ -126,7 +128,7 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book, onBorrow, onEdit, onRet
           {book.statusName === '貸出中' && (
             <ActionButton onClick={() => onReturn(book.id)}>返却</ActionButton>
           )}
-          <EditButton onClick={() => onEdit(book)}>編集</EditButton>
+          {isAdmin && <EditButton onClick={() => onEdit(book)}>編集</EditButton>}
         </ButtonGroup>
       </InfoSection>
     </DetailContainer>

@@ -5,6 +5,7 @@ export interface User {
   code: string;
   nameKana: string;
   notes: string;
-  departmentId: number;
-  departmentName: string;
+  departmentId: number | null;
+  departmentName: string | null;
+  isAdminStaff: boolean;
 }

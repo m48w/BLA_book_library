@@ -1,147 +1,202 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { getDashboardStats } from '../services/api';
+import { getDashboardStats, getRecommendedBooks } from '../services/api';
 import type { DashboardStats } from '../types/dashboard';
 import type { Book } from '../types/book';
+import { useAuth } from '../context/AuthContext';
 
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+// Styled Components
+const PageContainer = styled.div`
   padding: 2rem;
-  font-family: sans-serif;
+  background-color: #f0f2f5;
 `;
 
-const Title = styled.h1`
-  color: #333;
-  text-align: center;
+const WelcomeHeader = styled.div`
   margin-bottom: 2rem;
 `;
 
-const ErrorMessage = styled.p`
-  color: red;
-  text-align: center;
+const WelcomeTitle = styled.h1`
+  font-size: 2.2rem;
+  color: #1a202c;
+  margin: 0;
 `;
 
-const StatsGrid = styled.div`
+const WelcomeSubtitle = styled.p`
+  font-size: 1.1rem;
+  color: #718096;
+  margin-top: 0.25rem;
+`;
+
+const SummaryGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 3rem;
 `;
 
 const StatCard = styled.div`
-  background: #fff;
-  padding: 1.5rem;
+  background: white;
+  padding: 1.5rem 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 `;
 
 const StatValue = styled.p`
   font-size: 2.5rem;
   font-weight: bold;
-  color: #007bff;
+  color: #2d3748;
   margin: 0;
 `;
 
 const StatLabel = styled.p`
   font-size: 1rem;
-  color: #666;
+  color: #a0aec0;
   margin: 0.5rem 0 0 0;
 `;
 
-const RecentBooksList = styled.ul`
-  list-style: none;
-  padding: 0;
+const Section = styled.section`
+  margin-top: 3rem;
 `;
 
-const BookItem = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: #f9f9f9;
-  padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 0.5rem;
+const SectionTitle = styled.h2`
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
 `;
 
-const BookImage = styled.img`
-  width: 50px;
-  height: 70px;
+const BookListGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+`;
+
+const BookCard = styled.div`
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+`;
+
+const BookCover = styled.img`
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 4px;
 `;
 
-const PlaceholderImage = styled.div`
-  width: 50px;
-  height: 70px;
-  background-color: #e0e0e0;
+const BookInfo = styled.div`
+  padding: 1rem;
 `;
 
+const BookTitle = styled.h3`
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 0.25rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const BookAuthor = styled.p`
+  font-size: 0.875rem;
+  color: #718096;
+  margin: 0;
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+`;
+
+// Main Component
 const DashboardPage: React.FC = () => {
+  const { currentUser } = useAuth();
   const [stats, setStats] = useState<DashboardStats | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [recommendedBooks, setRecommendedBooks] = useState<Book[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchStats = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await getDashboardStats();
-      setStats(data);
-    } catch (err) {
-      console.error("Error fetching dashboard stats:", err);
-      setError('ダッシュボードデータの取得に失敗しました。');
-    } finally {
-      setLoading(false);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [statsData, recommendedData] = await Promise.all([
+          getDashboardStats(),
+          getRecommendedBooks(),
+        ]);
+        setStats(statsData);
+        setRecommendedBooks(recommendedData);
+      } catch (err) {
+        console.error("Error fetching dashboard data:", err);
+        setError('ダッシュボードデータの取得に失敗しました。');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    fetchStats();
-  }, [fetchStats]);
-
-  if (loading) return <p>読み込み中...</p>;
-  if (error) return <ErrorMessage>{error}</ErrorMessage>;
-  if (!stats) return <p>データがありません。</p>;
+  if (loading) return <PageContainer><p>読み込み中...</p></PageContainer>;
+  if (error) return <PageContainer><ErrorMessage>{error}</ErrorMessage></PageContainer>;
 
   return (
-    <Container>
-      <Title>ダッシュボード</Title>
-      <StatsGrid>
-        <StatCard>
-          <StatValue>{stats.totalBooks}</StatValue>
-          <StatLabel>総書籍数</StatLabel>
-        </StatCard>
-        <StatCard>
-          <StatValue>{stats.rentedBooks}</StatValue>
-          <StatLabel>貸出中の書籍</StatLabel>
-        </StatCard>
-        <StatCard>
-          <StatValue>{stats.totalUsers}</StatValue>
-          <StatLabel>総ユーザー数</StatLabel>
-        </StatCard>
-      </StatsGrid>
+    <PageContainer>
+      <WelcomeHeader>
+        <WelcomeTitle>ようこそ、{currentUser?.name}さん！</WelcomeTitle>
+        <WelcomeSubtitle>今日のライブラリの状況を確認しましょう。</WelcomeSubtitle>
+      </WelcomeHeader>
 
-      <h2>最近追加された書籍</h2>
-      <RecentBooksList>
-        {stats.recentlyAddedBooks.map((book: Book) => (
-          <BookItem key={book.id}>
-            {book.coverImageUrl ? (
-              <BookImage src={book.coverImageUrl} alt={book.title} />
-            ) : (
-              <PlaceholderImage />
-            )}
-            <div>
-              <strong>{book.title}</strong>
-              <p style={{ margin: '0.2rem 0', fontSize: '0.9rem', color: '#555' }}>
-                {book.authorNames || '不明な著者'}
-              </p>
-            </div>
-          </BookItem>
-        ))}
-      </RecentBooksList>
-    </Container>
+      {/* Summary Area */}
+      {stats && (
+        <SummaryGrid>
+          <StatCard><StatValue>{stats.totalBooks}</StatValue><StatLabel>総書籍数</StatLabel></StatCard>
+          <StatCard><StatValue>{stats.rentedBooks}</StatValue><StatLabel>貸出中の書籍</StatLabel></StatCard>
+          <StatCard><StatValue>{stats.totalUsers}</StatValue><StatLabel>総ユーザー数</StatLabel></StatCard>
+        </SummaryGrid>
+      )}
+
+      {/* Recently Added Books */}
+      {stats && stats.recentlyAddedBooks.length > 0 && (
+        <Section>
+          <SectionTitle>最近追加した本</SectionTitle>
+          <BookListGrid>
+            {stats.recentlyAddedBooks.map(book => (
+              <BookCard key={`recent-${book.id}`}>
+                <BookCover src={book.coverImageUrl || './placeholder.png'} alt={book.title} />
+                <BookInfo>
+                  <BookTitle title={book.title}>{book.title}</BookTitle>
+                  <BookAuthor>{book.authorNames || '不明'}</BookAuthor>
+                </BookInfo>
+              </BookCard>
+            ))}
+          </BookListGrid>
+        </Section>
+      )}
+
+      {/* Recommended Books */}
+      {recommendedBooks.length > 0 && (
+        <Section>
+          <SectionTitle>今月のおすすめ本</SectionTitle>
+          <BookListGrid>
+            {recommendedBooks.map(book => (
+              <BookCard key={`rec-${book.id}`}>
+                <BookCover src={book.coverImageUrl || './placeholder.png'} alt={book.title} />
+                <BookInfo>
+                  <BookTitle title={book.title}>{book.title}</BookTitle>
+                  <BookAuthor>{book.authorNames || '不明'}</BookAuthor>
+                </BookInfo>
+              </BookCard>
+            ))}
+          </BookListGrid>
+        </Section>
+      )}
+    </PageContainer>
   );
 };
 

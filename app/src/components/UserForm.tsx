@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import type { User } from '../types/user';
+import type { Department } from '../types/department';
+import { getDepartments } from '../services/api';
 
 const FormContainer = styled.form`
   display: flex;
@@ -14,6 +16,15 @@ const FormContainer = styled.form`
 `;
 
 const Input = styled.input`
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+`;
+
+const Select = styled.select`
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -80,13 +91,38 @@ const UserForm: React.FC<UserFormProps> = ({ initialUser, onSave, onCancel }) =>
     nameKana: '',
     email: '',
     code: '',
-    departmentId: 1, // Default department
-    notes: ''
+    departmentId: null, // Default department
+    notes: '',
+    isAdminStaff: false
   });
+  const [departments, setDepartments] = useState<Department[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const data = await getDepartments();
+        setDepartments(data);
+        if (!initialUser && data.length > 0) {
+          setUser(prev => ({ ...prev, departmentId: prev.departmentId ?? null }));
+        }
+      } catch (error) {
+        console.error("Failed to fetch departments", error);
+      }
+    };
+    fetchDepartments();
+  }, [initialUser]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setUser(prev => ({ ...prev, [name]: value }));
+
+    setUser(prev => ({
+      ...prev,
+      [name]: (() => {
+        if (name === 'isAdminStaff') return value === 'true';
+        if (name === 'departmentId') return value === '' ? null : Number(value);
+        return value;
+      })()
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -139,14 +175,19 @@ const UserForm: React.FC<UserFormProps> = ({ initialUser, onSave, onCancel }) =>
         />
       </Label>
       <Label>
-        部署ID:
-        <Input
-          type="number"
+        部署:
+        <Select
           name="departmentId"
-          value={user.departmentId}
+          value={user.departmentId ?? ''}
           onChange={handleChange}
-          required
-        />
+        >
+          <option value="">（未選択）</option>
+          {departments.map(dep => (
+            <option key={dep.id} value={dep.id}>
+              {dep.name}
+            </option>
+          ))}
+        </Select>
       </Label>
       <Label>
         備考:
@@ -155,6 +196,17 @@ const UserForm: React.FC<UserFormProps> = ({ initialUser, onSave, onCancel }) =>
           value={user.notes}
           onChange={handleChange}
         />
+      </Label>
+      <Label>
+        権限:
+        <Select
+          name="isAdminStaff"
+          value={String(user.isAdminStaff)}
+          onChange={handleChange}
+        >
+          <option value="false">User</option>
+          <option value="true">Admin</option>
+        </Select>
       </Label>
       <ButtonGroup>
         <CancelButton type="button" onClick={onCancel}>キャンセル</CancelButton>

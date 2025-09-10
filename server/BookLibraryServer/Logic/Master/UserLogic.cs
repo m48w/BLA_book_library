@@ -46,7 +46,8 @@ namespace BookLibraryServer.Logic.Master
                 user.NameKana,
                 user.Notes,
                 user.DepartmentId,
-                null // DepartmentNameはUsersテーブルの一部ではないため更新対象外
+                null, // DepartmentNameはUsersテーブルの一部ではないため更新対象外
+                user.IsAdminStaff
             );
 
             return await _userRepository.UpdateUserAsync(userToUpdate);

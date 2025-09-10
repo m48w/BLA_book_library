@@ -46,5 +46,12 @@ namespace BookLibraryServer.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("active")]
+        public async Task<IActionResult> GetActiveRentals()
+        {
+            var rentals = await _rentalLogic.GetActiveRentalsAsync();
+            return Ok(rentals);
+        }
     }
 }
