@@ -235,5 +235,47 @@ GROUP BY B.book_id, B.title, P.name, B.publication_date, B.isbn, B.cover_image_u
                 return books.Cast<IBookModel>();
             });
         }
+
+        public async Task<bool> UpdateStatusAsync(int bookId, int newStatusId)
+        {
+            var query = "UPDATE dbo.Books SET status_id = @NewStatusId WHERE book_id = @BookId";
+            return await _dbConnectionFactory.ExecuteAsync(async (connection) =>
+            {
+                var affectedRows = await connection.ExecuteAsync(query, new { BookId = bookId, NewStatusId = newStatusId });
+                return affectedRows > 0;
+            });
+        }
+
+        public async Task<IBookModel?> GetByIdAsync(int id)
+        {
+            var query = @"
+SELECT
+    B.book_id AS Id,
+    B.title AS Title,
+    P.name AS PublisherName,
+    B.publication_date AS PublicationDate,
+    B.isbn AS Isbn,
+    B.cover_image_url AS CoverImageUrl,
+    G.name AS GenreName,
+    B.description AS Description,
+    B.notes AS Notes,
+    B.is_recommended AS IsRecommended,
+    S.name AS StatusName,
+    STRING_AGG(A.name, ', ') AS AuthorNames
+FROM dbo.Books AS B
+LEFT JOIN dbo.Publishers AS P ON B.publisher_id = P.publisher_id
+LEFT JOIN dbo.Genres AS G ON B.genre_id = G.genre_id
+LEFT JOIN dbo.Statuses AS S ON B.status_id = S.status_id
+LEFT JOIN dbo.BookAuthors AS BA ON B.book_id = BA.book_id
+LEFT JOIN dbo.Authors AS A ON BA.author_id = A.author_id
+WHERE B.book_id = @Id
+GROUP BY B.book_id, B.title, P.name, B.publication_date, B.isbn, B.cover_image_url, G.name, B.description, B.notes, B.is_recommended, S.name";
+
+            return await _dbConnectionFactory.ExecuteAsync(async (connection) =>
+            {
+                var book = await connection.QueryFirstOrDefaultAsync<BookModel>(query, new { Id = id });
+                return book;
+            });
+        }
     }
 }

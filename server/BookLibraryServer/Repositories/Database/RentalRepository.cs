@@ -31,7 +31,14 @@ SELECT CAST(SCOPE_IDENTITY() as int);
 
         public async Task<IRentalModel?> GetActiveRentalByBookIdAsync(int bookId)
         {
-            var query = "SELECT * FROM dbo.Rentals WHERE book_id = @BookId AND return_date IS NULL";
+            var query = @"SELECT 
+    rental_id AS RentalId,
+    book_id AS BookId,
+    user_id AS UserId,
+    rental_date AS RentalDate,
+    due_date AS DueDate,
+    return_date AS ReturnDate
+FROM dbo.Rentals WHERE book_id = @BookId AND return_date IS NULL";
             return await _dbConnectionFactory.ExecuteAsync(async (connection) =>
             {
                 return await connection.QueryFirstOrDefaultAsync<RentalModel>(query, new { BookId = bookId });
@@ -81,6 +88,16 @@ WHERE R.return_date IS NULL;
             {
                 var rentals = await connection.QueryAsync<RentalDisplayModel>(query);
                 return rentals;
+            });
+        }
+
+        public async Task<bool> UpdateDueDateAsync(int rentalId, DateTime newDueDate)
+        {
+            var query = "UPDATE dbo.Rentals SET due_date = @NewDueDate WHERE rental_id = @RentalId AND return_date IS NULL";
+            return await _dbConnectionFactory.ExecuteAsync(async (connection) =>
+            {
+                var affectedRows = await connection.ExecuteAsync(query, new { RentalId = rentalId, NewDueDate = newDueDate });
+                return affectedRows > 0;
             });
         }
     }

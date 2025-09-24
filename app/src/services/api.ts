@@ -140,7 +140,20 @@ export const returnBook = async (bookId: number): Promise<void> => {
   await apiClient.post(`/rentals/return?bookId=${bookId}`);
 };
 
+export const extendRental = async (bookId: number): Promise<void> => {
+  await apiClient.post(`/rentals/extend?bookId=${bookId}`);
+};
+
+export const forceSetAvailable = async (bookId: number): Promise<void> => {
+  await apiClient.post(`/books/${bookId}/force-available`);
+};
+
 export const getActiveRentals = async (): Promise<RentalDisplay[]> => {
   const response = await apiClient.get<RentalDisplay[]>('/rentals/active');
+  return response.data;
+};
+
+export const forceBorrowBook = async (bookId: number, userId: number): Promise<any> => {
+  const response = await apiClient.post(`/rentals/force-borrow?bookId=${bookId}&userId=${userId}`);
   return response.data;
 };

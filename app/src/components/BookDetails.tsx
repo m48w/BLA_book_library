@@ -82,15 +82,33 @@ const EditButton = styled(ActionButton)`
   }
 `;
 
+const ForceButton = styled(ActionButton)`
+  background-color: #dc3545; // 赤色にして危険な操作であることを示す
+
+  &:hover {
+    background-color: #c82333;
+  }
+`;
+
 interface BookDetailsProps {
   book: Book;
   onBorrow: (bookId: number) => void;
   onEdit: (book: Book) => void;
   onReturn: (bookId: number) => void; // Added
+  onForceAvailable: (bookId: number) => void;
 }
 
-const BookDetails: React.FC<BookDetailsProps> = ({ book, onBorrow, onEdit, onReturn }) => {
+const BookDetails: React.FC<BookDetailsProps> = ({ book, onBorrow, onEdit, onReturn, onForceAvailable }) => {
   const { isAdmin } = useAuth();
+
+  const handleForceAvailable = () => {
+    if (window.confirm(`この本の貸し出し記録に問題がある可能性があります。
+強制的に「貸出可能」状態に戻しますか？
+この操作は取り消せません。`)) {
+      onForceAvailable(book.id);
+    }
+  };
+
   return (
     <DetailContainer>
       {book.coverImageUrl ? (
@@ -129,6 +147,9 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book, onBorrow, onEdit, onRet
             <ActionButton onClick={() => onReturn(book.id)}>返却</ActionButton>
           )}
           {isAdmin && <EditButton onClick={() => onEdit(book)}>編集</EditButton>}
+          {isAdmin && book.statusName === '貸出中' && (
+            <ForceButton onClick={handleForceAvailable}>強制的に貸出可能にする</ForceButton>
+          )}
         </ButtonGroup>
       </InfoSection>
     </DetailContainer>

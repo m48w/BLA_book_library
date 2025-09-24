@@ -8,5 +8,6 @@ namespace BookLibraryServer.Contract.Logic.Database
         Task<IBookModel> AddAsync(BookCreateModel book);
         Task<IBookModel?> UpdateAsync(int id, BookCreateModel book);
         Task<IEnumerable<IBookModel>> GetRecommendedAsync();
+        Task<bool> ForceSetAvailableAsync(int bookId);
     }
 }

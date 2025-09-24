@@ -1,6 +1,10 @@
 using BookLibraryServer.Contract.Logic.Database;
 using BookLibraryServer.Contract.Repositories.Database;
 using BookLibraryServer.Contract.Models.Database;
+using BookLibraryServer.Contract.Logic;
+using BookLibraryServer.Models;
+using Microsoft.Extensions.Options;
+using BookLibraryServer.Contract.Repositories.Master;
 
 namespace BookLibraryServer.Logic.Database
 {
@@ -8,6 +12,8 @@ namespace BookLibraryServer.Logic.Database
     {
         private readonly IRentalRepository _rentalRepository;
         private readonly IBookRepository _bookRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IEmailService _emailService;
 
         // Status IDs from the database
         private const int STATUS_AVAILABLE = 1; // 貸出可能
@@ -17,6 +23,7 @@ namespace BookLibraryServer.Logic.Database
         {
             _rentalRepository = rentalRepository;
             _bookRepository = bookRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<IRentalModel> BorrowBookAsync(int bookId, int userId)
@@ -48,7 +55,7 @@ namespace BookLibraryServer.Logic.Database
             var activeRental = await _rentalRepository.GetActiveRentalByBookIdAsync(bookId);
             if (activeRental == null)
             {
-                throw new InvalidOperationException("Book is not currently rented.");
+                return false;
             }
 
             // Record return date
@@ -63,10 +70,57 @@ namespace BookLibraryServer.Logic.Database
 
             return result;
         }
+        public async Task<IRentalModel> ForceBorrowBookAsync(int bookId, int userId)
+        {
+            // 既存の貸出をチェックし、あれば返却済みにする
+            var activeRental = await _rentalRepository.GetActiveRentalByBookIdAsync(bookId);
+            if (activeRental != null)
+            {
+                await _rentalRepository.RecordReturnAsync(activeRental.RentalId, DateTime.Now);
+            }
+
+            // 新しい貸出を記録
+            var rentalDate = DateTime.Now;
+            var dueDate = rentalDate.AddDays(14);
+            var newRental = await _rentalRepository.RecordRentalAsync(bookId, userId, rentalDate, dueDate);
+
+            // 書籍のステータスを貸出中に更新
+            await _rentalRepository.UpdateBookStatusAsync(bookId, STATUS_RENTED);
+
+            return newRental;
+        }
 
         public async Task<IEnumerable<RentalDisplayModel>> GetActiveRentalsAsync()
         {
             return await _rentalRepository.GetActiveRentalsAsync();
         }
+        public async Task<bool> ExtendRentalAsync(int bookId)
+        {
+            var activeRental = await _rentalRepository.GetActiveRentalByBookIdAsync(bookId);
+            if (activeRental == null)
+            {
+                return false; // No active rental found
+            }
+
+            // Extend the due date by a fixed period (e.g., 14 days)
+            var newDueDate = activeRental.DueDate.AddDays(14);
+
+            var result = await _rentalRepository.UpdateDueDateAsync(activeRental.RentalId, newDueDate);
+
+            if (result)
+            {
+                try
+                {
+                    await SendRentalNotificationAsync(bookId, activeRental.UserId, "Rental Extended", $"The due date has been extended to {newDueDate:yyyy-MM-dd}.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to send extension email: {ex.Message}");
+                }
+            }
+
+            return result;
+        }
+
     }
 }

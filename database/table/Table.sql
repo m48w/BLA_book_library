@@ -5,13 +5,14 @@ IF OBJECT_ID('[dbo].[Feedbacks]', 'U') IS NOT NULL DROP TABLE [dbo].[Feedbacks]
 IF OBJECT_ID('[dbo].[Requests]', 'U') IS NOT NULL DROP TABLE [dbo].[Requests]
 IF OBJECT_ID('[dbo].[BookAuthors]', 'U') IS NOT NULL DROP TABLE [dbo].[BookAuthors]
 IF OBJECT_ID('[dbo].[Books]', 'U') IS NOT NULL DROP TABLE [dbo].[Books]
-IF OBJECT_ID('[dbo].[Statuses]', 'U') IS NOT NULL DROP TABLE [dbo].[Statuses]
-IF OBJECT_ID('[dbo].[StatusCategories]', 'U') IS NOT NULL DROP TABLE [dbo].[StatusCategories]
 IF OBJECT_ID('[dbo].[Users]', 'U') IS NOT NULL DROP TABLE [dbo].[Users]
 IF OBJECT_ID('[dbo].[Departments]', 'U') IS NOT NULL DROP TABLE [dbo].[Departments]
 IF OBJECT_ID('[dbo].[Authors]', 'U') IS NOT NULL DROP TABLE [dbo].[Authors]
 IF OBJECT_ID('[dbo].[Publishers]', 'U') IS NOT NULL DROP TABLE [dbo].[Publishers]
 IF OBJECT_ID('[dbo].[Genres]', 'U') IS NOT NULL DROP TABLE [dbo].[Genres]
+IF OBJECT_ID('[dbo].[Statuses]', 'U') IS NOT NULL DROP TABLE [dbo].[Statuses]
+IF OBJECT_ID('[dbo].[StatusCategories]', 'U') IS NOT NULL DROP TABLE [dbo].[StatusCategories]
+GO
 
 -- -----------------------------------------------------
 -- Table `StatusCategories` (ステータスカテゴリテーブル)
@@ -75,11 +76,11 @@ CREATE TABLE [dbo].[Users] (
   [group_flag] BIT NULL,
   [hire_date] DATETIME NULL,
   [info_print_notes] NVARCHAR(2048) NULL,
+  [photo_url] NVARCHAR(255) NULL,
   PRIMARY KEY ([user_id]),
   UNIQUE ([code]),
   UNIQUE ([email]),
-      DepartmentId INT,
-    FOREIGN KEY (DepartmentId) REFERENCES M_Department(Id)
+  FOREIGN KEY ([department_id]) REFERENCES [dbo].[Departments]([department_id])
 );
 GO
 

@@ -11,6 +11,7 @@ namespace BookLibraryServer.Contract.Models.Master
         public string? Email { get; }
         public string? Code { get; }
         public string? NameKana { get; }
+        public string? PhotoUrl { get; }
         public string? Notes { get; }
         public int? DepartmentId { get; }
         public string? DepartmentName { get; }

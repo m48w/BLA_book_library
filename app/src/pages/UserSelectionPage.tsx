@@ -43,17 +43,25 @@ const UserCard = styled.div`
   }
 `;
 
-const AvatarPlaceholder = styled.div`
+const Avatar = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: #007bff;
   margin: 0 auto 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
+  font-weight: bold;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const UserName = styled.h3`
@@ -96,7 +104,13 @@ const UserSelectionPage: React.FC = () => {
       <UserGrid>
         {users.map(user => (
           <UserCard key={user.id} onClick={() => handleUserSelect(user)}>
-            <AvatarPlaceholder>{user.name.charAt(0)}</AvatarPlaceholder>
+            <Avatar>
+              {user.photo_url ? (
+                <img src={user.photo_url} alt={user.name} />
+              ) : (
+                user.name.charAt(0)
+              )}
+            </Avatar>
             <UserName>{user.name}</UserName>
           </UserCard>
         ))}

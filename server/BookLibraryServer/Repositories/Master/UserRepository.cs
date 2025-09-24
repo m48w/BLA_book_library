@@ -24,6 +24,7 @@ SELECT
   , U.email AS Email
   , U.code AS Code
   , U.name_kana AS NameKana
+  , U.photo_url AS PhotoUrl
   , U.notes AS Notes
   , D.department_id AS DepartmentId
   , D.name AS DepartmentName
@@ -54,6 +55,7 @@ SELECT
   , U.email AS Email
   , U.code AS Code
   , U.name_kana AS NameKana
+  , U.photo_url AS PhotoUrl
   , U.notes AS Notes
   , D.department_id AS DepartmentId
   , D.name AS DepartmentName
@@ -73,8 +75,8 @@ WHERE U.user_id = @Id
         public async Task<IUserModel> AddUserAsync(IUserModel user)
         {
             var query = @"
-INSERT INTO dbo.Users (name, email, code, name_kana, notes, department_id, is_admin_staff)
-VALUES (@Name, @Email, @Code, @NameKana, @Notes, @DepartmentId, @IsAdminStaff);
+INSERT INTO dbo.Users (name, email, code, name_kana, photo_url, notes, department_id, is_admin_staff)
+VALUES (@Name, @Email, @Code, @NameKana, @PhotoUrl, @Notes, @DepartmentId, @IsAdminStaff);
 SELECT CAST(SCOPE_IDENTITY() as int);
 ";
             return await _dbConnectionFactory.ExecuteAsync(async (connection) =>
@@ -93,6 +95,7 @@ SET
   email = @Email,
   code = @Code,
   name_kana = @NameKana,
+  photo_url = @PhotoUrl,
   notes = @Notes,
   department_id = @DepartmentId,
   is_admin_staff = @IsAdminStaff

@@ -7,5 +7,7 @@ namespace BookLibraryServer.Contract.Logic.Database
         Task<IRentalModel> BorrowBookAsync(int bookId, int userId);
         Task<bool> ReturnBookAsync(int bookId);
         Task<IEnumerable<RentalDisplayModel>> GetActiveRentalsAsync();
+        Task<IRentalModel> ForceBorrowBookAsync(int bookId, int userId);
+        Task<bool> ExtendRentalAsync(int bookId);
     }
 }

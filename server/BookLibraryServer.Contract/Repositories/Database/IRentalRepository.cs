@@ -9,5 +9,6 @@ namespace BookLibraryServer.Contract.Repositories.Database
         Task<bool> RecordReturnAsync(int rentalId, DateTime returnDate);
         Task<bool> UpdateBookStatusAsync(int bookId, int newStatusId);
         Task<IEnumerable<RentalDisplayModel>> GetActiveRentalsAsync();
+        Task<bool> UpdateDueDateAsync(int rentalId, DateTime newDueDate);
     }
 }

@@ -59,5 +59,16 @@ namespace BookLibraryServer.Controllers
             var books = await _bookLogic.GetRecommendedAsync();
             return Ok(books);
         }
+
+        [HttpPost("{id}/force-available")]
+        public async Task<IActionResult> ForceSetAvailable(int id)
+        {
+            var result = await _bookLogic.ForceSetAvailableAsync(id);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
     }
 }

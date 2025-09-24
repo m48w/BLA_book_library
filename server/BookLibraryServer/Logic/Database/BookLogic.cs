@@ -33,5 +33,12 @@ namespace BookLibraryServer.Logic.Database
         {
             return await _bookRepository.GetRecommendedAsync();
         }
+
+        private const int STATUS_AVAILABLE = 1; // 貸出可能
+
+        public async Task<bool> ForceSetAvailableAsync(int bookId)
+        {
+            return await _bookRepository.UpdateStatusAsync(bookId, STATUS_AVAILABLE);
+        }
     }
 }

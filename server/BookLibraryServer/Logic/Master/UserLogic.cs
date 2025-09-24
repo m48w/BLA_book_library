@@ -44,6 +44,7 @@ namespace BookLibraryServer.Logic.Master
                 user.Email,
                 user.Code,
                 user.NameKana,
+                user.PhotoUrl,
                 user.Notes,
                 user.DepartmentId,
                 null, // DepartmentNameはUsersテーブルの一部ではないため更新対象外

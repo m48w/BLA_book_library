@@ -91,6 +91,7 @@ const UserForm: React.FC<UserFormProps> = ({ initialUser, onSave, onCancel }) =>
     nameKana: '',
     email: '',
     code: '',
+    photo_url: '',
     departmentId: null, // Default department
     notes: '',
     isAdminStaff: false
@@ -171,6 +172,15 @@ const UserForm: React.FC<UserFormProps> = ({ initialUser, onSave, onCancel }) =>
           type="text"
           name="code"
           value={user.code}
+          onChange={handleChange}
+        />
+      </Label>
+      <Label>
+        写真URL:
+        <Input
+          type="text"
+          name="photo_url"
+          value={user.photo_url}
           onChange={handleChange}
         />
       </Label>

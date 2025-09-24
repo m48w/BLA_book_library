@@ -16,6 +16,7 @@ DELETE FROM [dbo].[Genres];
 GO
 
 -- IDENTITY値をリセットして、IDが1から始まるようにします
+-- RESEED値を -1 に設定することで、次に挿入されるIDが0ではなく1から始まることを保証します
 DBCC CHECKIDENT ('[dbo].[Rentals]', RESEED, 0);
 DBCC CHECKIDENT ('[dbo].[Feedbacks]', RESEED, 0);
 DBCC CHECKIDENT ('[dbo].[Requests]', RESEED, 0);
@@ -85,12 +86,12 @@ DECLARE @department_development INT = (SELECT [department_id] FROM [dbo].[Depart
 DECLARE @department_sales INT = (SELECT [department_id] FROM [dbo].[Departments] WHERE [name] = N'営業部');
 
 -- 'user_id'は自動採番されるため、INSERT文には含めません。
-INSERT INTO [dbo].[Users] ([code], [department_id], [name], [name_kana], [position], [postal_code], [address_1], [address_2], [email], [phone_tel], [hire_date], [is_admin_staff]) VALUES
-(N'E001', @department_general, N'山田 太郎', N'ヤマダ タロウ', N'部長', N'100-0005', N'東京都千代田区丸の内', N'1-1-1', 'taro.yamada@example.com', '03-1234-5678', '2010-04-01', 1),
-(N'E002', @department_development, N'鈴木 花子', N'スズキ ハナコ', N'課長', N'540-0002', N'大阪府大阪市中央区大阪城', N'1-1', 'hanako.suzuki@example.com', '06-9876-5432', '2012-04-01', 0),
-(N'E003', @department_development, N'佐藤 次郎', N'サトウ ジロウ', N'係長', N'460-0001', N'愛知県名古屋市中区三の丸', N'1-1-1', 'jiro.sato@example.com', '052-1111-2222', '2015-10-01', 0),
-(N'E004', @department_sales, N'高橋 美咲', N'タカハシ ミサキ', N'主任', N'810-0001', N'福岡県福岡市中央区天神', N'1-8-1', 'misaki.takahashi@example.com', '092-3333-4444', '2018-04-01', 0),
-(N'E005', @department_general, N'田中 健太', N'タナカ ケンタ', N'一般社員', N'060-0001', N'北海道札幌市中央区北一条西', N'2丁目', 'kenta.tanaka@example.com', '011-5555-6666', '2020-04-01', 0);
+INSERT INTO [dbo].[Users] ([code], [department_id], [name], [name_kana], [position], [postal_code], [address_1], [address_2], [email], [phone_tel], [hire_date], [is_admin_staff], [photo_url]) VALUES
+(N'E001', @department_general, N'山田 太郎', N'ヤマダ タロウ', N'部長', N'100-0005', N'東京都千代田区丸の内', N'1-1-1', 'taro.yamada@example.com', '03-1234-5678', '2010-04-01', 1, 'https://example.com/photos/E001.jpg'),
+(N'E002', @department_development, N'鈴木 花子', N'スズキ ハナコ', N'課長', N'540-0002', N'大阪府大阪市中央区大阪城', N'1-1', 'hanako.suzuki@example.com', '06-9876-5432', '2012-04-01', 0, 'https://example.com/photos/E002.jpg'),
+(N'E003', @department_development, N'佐藤 次郎', N'サトウ ジロウ', N'係長', N'460-0001', N'愛知県名古屋市中区三の丸', N'1-1-1', 'jiro.sato@example.com', '052-1111-2222', '2015-10-01', 0, NULL),
+(N'E004', @department_sales, N'高橋 美咲', N'タカハシ ミサキ', N'主任', N'810-0001', N'福岡県福岡市中央区天神', N'1-8-1', 'misaki.takahashi@example.com', '092-3333-4444', '2018-04-01', 0, 'https://example.com/photos/E004.jpg'),
+(N'E005', @department_general, N'田中 健太', N'タナカ ケンタ', N'一般社員', N'060-0001', N'北海道札幌市中央区北一条西', N'2丁目', 'kenta.tanaka@example.com', '011-5555-6666', '2020-04-01', 0, NULL);
 
 -- Books (書籍)
 -- ステータスIDを変数に格納
@@ -123,19 +124,19 @@ INSERT INTO [dbo].[BookAuthors] ([book_id], [author_id]) VALUES
 
 -- Rentals (貸出履歴)
 INSERT INTO [dbo].[Rentals] ([book_id], [user_id], [rental_date], [due_date], [return_date]) VALUES
-((SELECT [book_id] FROM [dbo].[Books] WHERE [isbn] = '9784163242103'), (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = 'E002'), '2025-08-10', '2025-08-24', NULL),
-((SELECT [book_id] FROM [dbo].[Books] WHERE [isbn] = '9784101369144'), (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = 'E001'), '2025-08-15', '2025-08-29', NULL),
-((SELECT [book_id] FROM [dbo].[Books] WHERE [isbn] = '9784103534121'), (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = 'E003'), '2025-07-20', '2025-08-03', '2025-08-01');
+((SELECT [book_id] FROM [dbo].[Books] WHERE [isbn] = '9784163242103'), (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = N'E002'), '2025-08-10', '2025-08-24', NULL),
+((SELECT [book_id] FROM [dbo].[Books] WHERE [isbn] = '9784101369144'), (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = N'E001'), '2025-08-15', '2025-08-29', NULL),
+((SELECT [book_id] FROM [dbo].[Books] WHERE [isbn] = '9784103534121'), (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = N'E003'), '2025-07-20', '2025-08-03', '2025-08-01');
 
 -- Feedbacks (フィードバック)
 INSERT INTO [dbo].[Feedbacks] ([book_id], [user_id], [comment], [rating]) VALUES
-((SELECT [book_id] FROM [dbo].[Books] WHERE [isbn] = '9784103534121'), (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = 'E003'), N'独特の世界観に引き込まれました。', 5);
+((SELECT [book_id] FROM [dbo].[Books] WHERE [isbn] = '9784103534121'), (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = N'E003'), N'独特の世界観に引き込まれました。', 5);
 
 -- Requests (購入リクエスト)
 DECLARE @status_requested INT = (SELECT [status_id] FROM [dbo].[Statuses] WHERE [category_id] = @request_category_id AND [name] = N'リクエスト中');
 DECLARE @status_approved INT = (SELECT [status_id] FROM [dbo].[Statuses] WHERE [category_id] = @request_category_id AND [name] = N'承認');
 
 INSERT INTO [dbo].[Requests] ([title], [author], [publisher], [user_id], [status_id], [reason]) VALUES
-(N'思考は現実化する', N'ナポレオン・ヒル', N'きこ書房', (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = 'E005'), @status_requested, N'自己啓発の古典として読んでみたいです。'),
-(N'サピエンス全史', N'ユヴァル・ノア・ハラリ', N'河出書房新社', (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = 'E004'), @status_approved, N'人類の歴史を俯瞰できる名著だと聞きました。');
+(N'思考は現実化する', N'ナポレオン・ヒル', N'きこ書房', (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = N'E005'), @status_requested, N'自己啓発の古典として読んでみたいです。'),
+(N'サピエンス全史', N'ユヴァル・ノア・ハラリ', N'河出書房新社', (SELECT [user_id] FROM [dbo].[Users] WHERE [code] = N'E004'), @status_approved, N'人類の歴史を俯瞰できる名著だと聞きました。');
 GO

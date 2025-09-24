@@ -24,7 +24,7 @@ const UserCard = styled.div`
   }
 `;
 
-const AvatarPlaceholder = styled.div`
+const Avatar = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -36,6 +36,13 @@ const AvatarPlaceholder = styled.div`
   font-size: 2.5rem;
   color: white;
   font-weight: bold;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const UserName = styled.h3`
@@ -93,7 +100,13 @@ const UserList: React.FC<UserListProps> = ({ users, onEdit, onDelete }) => {
     <UserGrid>
       {users.map(user => (
         <UserCard key={user.id}>
-          <AvatarPlaceholder>{user.name.charAt(0)}</AvatarPlaceholder>
+          <Avatar>
+            {user.photo_url ? (
+              <img src={user.photo_url} alt={user.name} />
+            ) : (
+              user.name.charAt(0)
+            )}
+          </Avatar>
           <UserName>{user.name}</UserName>
           <UserRole>{user.isAdminStaff ? 'Admin' : 'User'}</UserRole>
           <UserEmail>{user.email}</UserEmail>
