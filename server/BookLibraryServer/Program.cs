@@ -25,6 +25,7 @@ namespace BookLibraryServer
             builder.Services.AddScoped<BookLibraryServer.Contract.Repositories.Database.IBookRepository, BookLibraryServer.Repositories.Database.BookRepository>();
             builder.Services.AddScoped<BookLibraryServer.Contract.Repositories.Database.IDashboardRepository, BookLibraryServer.Repositories.Database.DashboardRepository>();
             builder.Services.AddScoped<BookLibraryServer.Contract.Repositories.Database.IRentalRepository, BookLibraryServer.Repositories.Database.RentalRepository>();
+            builder.Services.AddScoped<BookLibraryServer.Contract.Repositories.Database.IFeedbackRepository, BookLibraryServer.Repositories.Database.FeedbackRepository>();
 
             // Logic
             builder.Services.AddScoped<BookLibraryServer.Contract.Logic.Master.IAuthorLogic, BookLibraryServer.Logic.Master.AuthorLogic>();
@@ -35,6 +36,7 @@ namespace BookLibraryServer
             builder.Services.AddScoped<BookLibraryServer.Contract.Logic.Database.IBookLogic, BookLibraryServer.Logic.Database.BookLogic>();
             builder.Services.AddScoped<BookLibraryServer.Contract.Logic.Database.IDashboardLogic, BookLibraryServer.Logic.Database.DashboardLogic>();
             builder.Services.AddScoped<BookLibraryServer.Contract.Logic.Database.IRentalLogic, BookLibraryServer.Logic.Database.RentalLogic>();
+            builder.Services.AddScoped<BookLibraryServer.Contract.Logic.Database.IFeedbackLogic, BookLibraryServer.Logic.Database.FeedbackLogic>();
 
             // Add services to the container.
             builder.Services.AddHttpClient();

@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { getActiveRentals, returnBook, forceBorrowBook, getBooks, getUsers, extendRental } from '../services/api';
+import { getActiveRentals, returnBook, extendRental } from '../services/api';
 import type { RentalDisplay } from '../types/rentalDisplay';
-import type { Book } from '../types/book';
-import type { User } from '../types/user';
+import { useAuth } from '../context/AuthContext';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -95,41 +94,6 @@ const ReturnButton = styled.button`
   }
 `;
 
-const ForceBorrowContainer = styled.div`
-  background: #f9f9f9;
-  padding: 2rem;
-  border-radius: 8px;
-  margin-top: 3rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
-  h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  div {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-  }
-
-  select, button {
-    padding: 0.8rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-
-  button {
-    background-color: #f0ad4e;
-    color: white;
-    cursor: pointer;
-    &:hover {
-      background-color: #ec971f;
-    }
-  }
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -149,13 +113,10 @@ const ExtendButton = styled.button`
 `;
 
 const RentalsPage: React.FC = () => {
+  const { currentUser } = useAuth();
   const [rentals, setRentals] = useState<RentalDisplay[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [books, setBooks] = useState<Book[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
-  const [selectedBookId, setSelectedBookId] = useState<string>('');
-  const [selectedUserId, setSelectedUserId] = useState<string>('');
 
   const fetchRentals = useCallback(async () => {
     setLoading(true);
@@ -170,23 +131,9 @@ const RentalsPage: React.FC = () => {
     }
   }, []);
 
-  const fetchBooksAndUsers = useCallback(async () => {
-    try {
-      const booksData = await getBooks();
-      const usersData = await getUsers();
-      setBooks(booksData);
-      setUsers(usersData);
-      if (booksData.length > 0) setSelectedBookId(String(booksData[0].id));
-      if (usersData.length > 0) setSelectedUserId(String(usersData[0].id));
-    } catch (err) {
-      setError('書籍またはユーザーのデータの取得に失敗しました。');
-    }
-  }, []);
-
   useEffect(() => {
     fetchRentals();
-    fetchBooksAndUsers();
-  }, [fetchRentals, fetchBooksAndUsers]);
+  }, [fetchRentals]);
 
   const handleReturn = async (bookId: number) => {
     try {
@@ -208,36 +155,9 @@ const RentalsPage: React.FC = () => {
     }
   };
 
-  const handleForceBorrow = async () => {
-    if (!selectedBookId || !selectedUserId) {
-      alert('書籍とユーザーを選択してください。');
-      return;
-    }
-    try {
-      await forceBorrowBook(Number(selectedBookId), Number(selectedUserId));
-      alert('書籍を強制的に貸し出しました。');
-      fetchRentals(); // Refresh the list
-    } catch (err) {
-      alert('強制貸出処理に失敗しました。');
-    }
-  };
-
   return (
     <Container>
       <Title>貸出管理</Title>
-
-      <ForceBorrowContainer>
-        <h2>強制貸出</h2>
-        <div>
-          <select value={selectedBookId} onChange={e => setSelectedBookId(e.target.value)}>
-            {books.map(book => <option key={book.id} value={book.id}>{book.title}</option>)}
-          </select>
-          <select value={selectedUserId} onChange={e => setSelectedUserId(e.target.value)}>
-            {users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
-          </select>
-          <button onClick={handleForceBorrow}>強制貸出を実行</button>
-        </div>
-      </ForceBorrowContainer>
 
       <h2 style={{ textAlign: 'center', marginTop: '3rem' }}>貸出中の書籍</h2>
       {loading && <p>読み込み中...</p>}
@@ -255,10 +175,12 @@ const RentalsPage: React.FC = () => {
               <BookTitle>{rental.bookTitle}</BookTitle>
               <UserInfo>借りている人: {rental.userName}</UserInfo>
               <DueDate>返却予定日: {new Date(rental.dueDate).toLocaleDateString()}</DueDate>
-              <ButtonContainer>
-                <ReturnButton onClick={() => handleReturn(rental.bookId)}>返却</ReturnButton>
-                <ExtendButton onClick={() => handleExtend(rental.bookId)}>延長</ExtendButton>
-              </ButtonContainer>
+              {currentUser && currentUser.id === rental.userId && (
+                <ButtonContainer>
+                  <ReturnButton onClick={() => handleReturn(rental.bookId)}>返却</ReturnButton>
+                  <ExtendButton onClick={() => handleExtend(rental.bookId)}>延長</ExtendButton>
+                </ButtonContainer>
+              )}
             </RentalCard>
           ))}
         </RentalListContainer>

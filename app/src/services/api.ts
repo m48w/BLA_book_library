@@ -6,6 +6,8 @@ import type { User } from '../types/user'; // 追加
 import type { Department } from '../types/department';
 import type { Book } from '../types/book';
 import type { DashboardStats } from '../types/dashboard';
+import type { Feedback } from '../types/feedback';
+import type { RentalDisplay } from '../types/rentalDisplay';
 
 const apiClient = axios.create({
   baseURL: '/api/v1', // Viteのプロキシ設定に合わせる
@@ -144,10 +146,6 @@ export const extendRental = async (bookId: number): Promise<void> => {
   await apiClient.post(`/rentals/extend?bookId=${bookId}`);
 };
 
-export const forceSetAvailable = async (bookId: number): Promise<void> => {
-  await apiClient.post(`/books/${bookId}/force-available`);
-};
-
 export const getActiveRentals = async (): Promise<RentalDisplay[]> => {
   const response = await apiClient.get<RentalDisplay[]>('/rentals/active');
   return response.data;
@@ -155,5 +153,21 @@ export const getActiveRentals = async (): Promise<RentalDisplay[]> => {
 
 export const forceBorrowBook = async (bookId: number, userId: number): Promise<any> => {
   const response = await apiClient.post(`/rentals/force-borrow?bookId=${bookId}&userId=${userId}`);
+  return response.data;
+};
+
+export const getFeedbacks = async (bookId: number): Promise<Feedback[]> => {
+  const response = await apiClient.get(`/books/${bookId}/feedbacks`);
+  return response.data;
+};
+
+export interface FeedbackFormData {
+  comment: string;
+  userId: number;
+  rating?: number;
+}
+
+export const addFeedback = async (bookId: number, feedback: FeedbackFormData): Promise<Feedback> => {
+  const response = await apiClient.post(`/books/${bookId}/feedbacks`, feedback);
   return response.data;
 };

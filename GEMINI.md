@@ -69,7 +69,6 @@
     *   `.NET`の標準DIコンテナを使用し、アプリケーションの起動時にインターフェースとその実装クラスを登録します。
     *   `AddScoped`: `IAuthorLogic`や`IAuthorRepository`などはリクエストごとにインスタンスが生成されます。
     *   `AddSingleton`: `IDbConnectionFactory`はアプリケーション全体で単一のインスタンスを共有します。
-    *   `AddTransient`: `IEmailService`は注入されるたびに新しいインスタンスが生成されます。
 
 *   **データベース接続 (`SqlConnectionFactory.cs`)**:
     *   `IDbConnectionFactory`の実装として、`appsettings.json`から取得した接続文字列を保持します。

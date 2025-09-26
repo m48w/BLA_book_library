@@ -13,13 +13,12 @@ namespace BookLibraryServer.Logic.Database
         private readonly IRentalRepository _rentalRepository;
         private readonly IBookRepository _bookRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IEmailService _emailService;
 
         // Status IDs from the database
         private const int STATUS_AVAILABLE = 1; // 貸出可能
         private const int STATUS_RENTED = 2;    // 貸出中
 
-        public RentalLogic(IRentalRepository rentalRepository, IBookRepository bookRepository)
+        public RentalLogic(IRentalRepository rentalRepository, IBookRepository bookRepository, IUserRepository userRepository)
         {
             _rentalRepository = rentalRepository;
             _bookRepository = bookRepository;
@@ -106,18 +105,6 @@ namespace BookLibraryServer.Logic.Database
             var newDueDate = activeRental.DueDate.AddDays(14);
 
             var result = await _rentalRepository.UpdateDueDateAsync(activeRental.RentalId, newDueDate);
-
-            if (result)
-            {
-                try
-                {
-                    await SendRentalNotificationAsync(bookId, activeRental.UserId, "Rental Extended", $"The due date has been extended to {newDueDate:yyyy-MM-dd}.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Failed to send extension email: {ex.Message}");
-                }
-            }
 
             return result;
         }

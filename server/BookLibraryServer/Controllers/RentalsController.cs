@@ -62,7 +62,7 @@ namespace BookLibraryServer.Controllers
                 var rental = await _rentalLogic.ForceBorrowBookAsync(bookId, userId);
                 return Ok(rental);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception details here
                 return StatusCode(500, "An unexpected error occurred.");

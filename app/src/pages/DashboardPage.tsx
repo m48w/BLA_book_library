@@ -90,6 +90,17 @@ const BookCover = styled.img`
   object-fit: cover;
 `;
 
+const PlaceholderImage = styled.div`
+  width: 100%;
+  height: 200px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 1rem;
+`;
+
 const BookInfo = styled.div`
   padding: 1rem;
 `;
@@ -168,7 +179,11 @@ const DashboardPage: React.FC = () => {
           <BookListGrid>
             {stats.recentlyAddedBooks.map(book => (
               <BookCard key={`recent-${book.id}`}>
-                <BookCover src={book.coverImageUrl || './placeholder.png'} alt={book.title} />
+                {book.coverImageUrl ? (
+                  <BookCover src={book.coverImageUrl} alt={book.title} />
+                ) : (
+                  <PlaceholderImage>No Image</PlaceholderImage>
+                )}
                 <BookInfo>
                   <BookTitle title={book.title}>{book.title}</BookTitle>
                   <BookAuthor>{book.authorNames || '不明'}</BookAuthor>
@@ -186,7 +201,11 @@ const DashboardPage: React.FC = () => {
           <BookListGrid>
             {recommendedBooks.map(book => (
               <BookCard key={`rec-${book.id}`}>
-                <BookCover src={book.coverImageUrl || './placeholder.png'} alt={book.title} />
+                {book.coverImageUrl ? (
+                  <BookCover src={book.coverImageUrl} alt={book.title} />
+                ) : (
+                  <PlaceholderImage>No Image</PlaceholderImage>
+                )}
                 <BookInfo>
                   <BookTitle title={book.title}>{book.title}</BookTitle>
                   <BookAuthor>{book.authorNames || '不明'}</BookAuthor>

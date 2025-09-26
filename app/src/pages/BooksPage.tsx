@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { getBooks, createBook, getAuthors, getGenres, getPublishers, updateBook, borrowBook, returnBook, forceSetAvailable } from '../services/api';
+import { getBooks, createBook, getAuthors, getGenres, getPublishers, updateBook, borrowBook, returnBook } from '../services/api';
 import type { BookFormData } from '../services/api';
 import BookList from '../components/BookList';
 import BookForm from '../components/BookForm';
@@ -222,18 +222,6 @@ const BooksPage: React.FC = () => {
     }
   };
 
-  const handleForceAvailable = async (bookId: number) => {
-    try {
-      await forceSetAvailable(bookId);
-      alert(`書籍ID: ${bookId} のステータスを「貸出可能」に更新しました。`);
-      closeAllModals();
-      await fetchBooks(searchTerm, selectedGenre);
-    } catch (err) {
-      console.error("Error forcing book to be available:", err);
-      alert('書籍ステータスの更新に失敗しました。');
-    }
-  };
-
   const handleEdit = (book: Book) => {
     console.log("handleEdit: called with book", book);
     setSelectedBook(book);
@@ -304,7 +292,6 @@ const BooksPage: React.FC = () => {
             onBorrow={handleBorrow}
             onEdit={handleEdit}
             onReturn={handleReturn}
-            onForceAvailable={handleForceAvailable}
           />
         </Modal>
       )}

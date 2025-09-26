@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+wjxv5EQ9+M=",
+  "dgSpecHash": "kbh0HD7RFkc=",
   "success": true,
   "projectFilePath": "C:\\Users\\koko\\KOKO\\sample_code\\mk_sample\\BLA_book_library\\server\\BookLibraryServer\\BookLibraryServer.csproj",
   "expectedPackageFiles": [
@@ -46,5 +46,15 @@
     "C:\\Users\\koko\\.nuget\\packages\\system.security.cryptography.protecteddata\\8.0.0\\system.security.cryptography.protecteddata.8.0.0.nupkg.sha512",
     "C:\\Users\\koko\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "パッケージの脆弱性データの取得中にエラーが発生しました: ソース https://codeer.pkgs.visualstudio.com/digic_assist/_packaging/LicenseServer/nuget/v3/index.json のサービス インデックスを読み込めません。",
+      "projectPath": "C:\\Users\\koko\\KOKO\\sample_code\\mk_sample\\BLA_book_library\\server\\BookLibraryServer\\BookLibraryServer.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\koko\\KOKO\\sample_code\\mk_sample\\BLA_book_library\\server\\BookLibraryServer\\BookLibraryServer.csproj",
+      "targetGraphs": []
+    }
+  ]
 }
